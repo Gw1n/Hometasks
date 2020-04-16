@@ -1,0 +1,43 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int N;
+    cin >> N;
+    int mat[N][N] = {};
+
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            cin >> mat[i][j];
+        }
+    }
+
+    int k;
+    double z;
+    double s11 = 1, s12 = 0, s21 = 1, s22 = 0;
+
+
+    for (int i = 0; i < N; i++)
+    {
+        s11 = 1;
+        k = 2*N - 1 - i;
+        s21 = 1;
+        for (int j = 0; j < N; j++)
+            {
+                s21 *= mat[j][k % N];
+                k--;
+                s11 *= mat[j][(j + i) % N];
+            }
+    s22 += s21;
+    s12 += s11;
+    }
+
+    z = s12 - s22;
+    cout << z;
+
+    return 0;
+}
